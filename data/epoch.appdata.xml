@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright 2021 Rajdeep Singha <singharajdeep97@gmail.com> -->
+<component type="desktop">
+	<id>com.github.Suzie97.epoch</id>
+	<metadata_license>CCO</metadata_license>
+	<name>Epoch</name>
+	<summary>Keep track of different time zones</summary>
+	<description>
+		<p>Keep track of different time zones easily and efficiently with this minimally designed applet.</p>
+		<ul>
+			<li>Change the cities whose time needs to be displayed</li>
+			<li>Quit with the handy shortcut Ctrl + Q</li>
+		</ul>
+	</description>
+</component>

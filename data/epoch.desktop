@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Epoch
+GenericName=Clocks Widget
+Comment=Keep track of different time zones
+Categories=Utility;
+Exec=com.github.Suzie97.epoch
+Icon=application-default-icon
+Terminal=false
+Type=Application
+Keywords=Time;World;Clock;Clocks;Zone;
