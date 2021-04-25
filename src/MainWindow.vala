@@ -34,6 +34,15 @@ public class Epoch.MainWindow : Gtk.ApplicationWindow {
             title: _("Epoch"),
             width_request: 500
         );
+        
+        // Handle dragging the entire widget
+        button_press_event.connect ((e) => {
+            if (e.button == Gdk.BUTTON_PRIMARY) {
+                begin_move_drag ((int) e.button, (int) e.x_root, (int) e.y_root, e.time);
+                return true;
+            }
+            return false;
+        });
     }
     
     construct {
@@ -56,7 +65,7 @@ public class Epoch.MainWindow : Gtk.ApplicationWindow {
         
         var main_grid = new Gtk.Grid () {
             hexpand = true,
-            margin = 16
+            margin = 0
         };
         main_grid.get_style_context ().add_class ("main_grid");
         main_grid.add (content_area);
@@ -86,6 +95,13 @@ public class Epoch.MainWindow : Gtk.ApplicationWindow {
         preferences_button.clicked.connect (() => {
             content_area.visible_child = preferences_view;
             preferences_button.visible = false;
+            preferences_view.stick_switch.notify["active"].connect (() => {
+                if (preferences_view.stick_switch.active) {
+                    unstick ();
+                } else {
+                    stick ();
+                }
+            });
         });
         
         preferences_view.done_button.clicked.connect (() => {

@@ -32,7 +32,6 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         seek.begin ();
         
         face1_label = new Gtk.Label ("");
-        // face1_label.label = dgettext ("libgweather-locations", location.get_city_name ());
         face1_label.halign = Gtk.Align.CENTER;
         face1_label.hexpand = true;
         face1_label.margin_top = 6;
@@ -48,7 +47,7 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         face2_label.set_max_width_chars (12);
         
         face3_label = new Gtk.Label ("London");
-        face3_label.set_markup ("<span font_desc='Inter 14'><b>London</b></span>");
+        face3_label.set_markup ("<span font_desc='Inter 14'><b>Tokyo</b></span>");
         face3_label.halign = Gtk.Align.CENTER;
         face3_label.hexpand = true;
         face3_label.margin_top = 6;
@@ -64,9 +63,11 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         face4_label.set_max_width_chars (12);
         }
         
+    
+    // Get the users location    
     public async void seek () {
         try {
-            simple = yield new GClue.Simple ("com.gihhub.Suzie97.epoch", GClue.AccuracyLevel.CITY, null);
+            simple = yield new GClue.Simple ("com.github.Suzie97.epoch", GClue.AccuracyLevel.CITY, null);
         } catch (Error e) {
             warning ("Failed to connect to GeoClue2 service: %s", e.message);
             return;
@@ -75,7 +76,7 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         simple.notify["location"].connect (() => {
             on_location_updated.begin ();
         });
-        
+
         on_location_updated.begin ();
     }
     
@@ -83,7 +84,6 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         geo_location = simple.get_location ();
         
         location = location.find_nearest_city (geo_location.latitude, geo_location.longitude);
-        // stdout.printf ("%s", location.get_city_name);
         
         if (location != null) {
             face1_label.label = dgettext ("libgweather-locations", location.get_city_name ());

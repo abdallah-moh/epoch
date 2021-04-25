@@ -73,7 +73,7 @@ public class ClockFaces : DrawingArea {
                         y + (radius - inset) * Math.sin (i * Math.PI / 6));
             cr.line_to (x + radius * Math.cos (i * Math.PI / 6),
                         y + radius * Math.sin (i * Math.PI / 6));
-            cr.set_source_rgb (245, 245, 245) ; // red
+            cr.set_source_rgb (245, 245, 245) ;
             cr.stroke ();
             cr.restore ();
         }
@@ -90,7 +90,7 @@ public class ClockFaces : DrawingArea {
         cr.move_to (x, y) ;
         cr.line_to (x + radius / 2 * Math.sin (Math.PI / 6 * hours
                                              + Math.PI / 360 * minutes),
-                    y + radius / 2 * -Math.cos (Math.PI / 6 * hours
+                    y + radius / 2 * Math.cos (Math.PI / 6 * hours
                                               + Math.PI / 360 * minutes));
         cr.stroke ();
         cr.restore ();
@@ -192,6 +192,5 @@ public class ClockFaces : DrawingArea {
         var region = window.get_clip_region ();
         // redraw the cairo canvas completely by exposing it
         window.invalidate_region (region, true);
-        window.process_updates (true);
     }
 }
