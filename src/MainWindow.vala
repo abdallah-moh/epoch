@@ -67,7 +67,7 @@ public class Epoch.MainWindow : Gtk.ApplicationWindow {
             hexpand = true,
             margin = 0
         };
-        main_grid.get_style_context ().add_class ("main_grid");
+        // main_grid.get_style_context ().add_class ("main_grid");
         main_grid.add (content_area);
         
         var headerbar = new Gtk.HeaderBar ();

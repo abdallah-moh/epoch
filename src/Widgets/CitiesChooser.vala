@@ -21,30 +21,33 @@
 public class Epoch.CitiesChooser : Gtk.MenuButton {
 	private Epoch.CitiesSearch cities_search;
 	
+	private Epoch.LabelsGrid labels_grid;
+	
+	public Gtk.Label button_label;
+	
 	construct {
+		labels_grid = new Epoch.LabelsGrid ();
+		
 		var button_grid = new Gtk.Grid ();
 		button_grid.column_spacing = 6;
-		var button_label = new Gtk.Label ("Dimapur");
+		// button_label = new Gtk.Label (labels_grid.face1_label.get_text ());
+		button_label = new Gtk.Label ("Dimapur");
 		button_grid.add (button_label);
 		button_grid.add (new Gtk.Image.from_icon_name ("pan-down-symbolic", Gtk.IconSize.MENU));
 		add (button_grid);
 		
 		cities_search = new Epoch.CitiesSearch ();
-		cities_search.show ();
+		cities_search.show_all ();
 		
-		/* Use a event.eventkey.keypress here to add update the label of the menu_button using set_text */
-		if (cities_search.location_entry.visible) {
-			key_press_event.connect ((event) => {
-				if (event.key.keyval == 0xFF0D) {
-					button_label.set_text (cities_search.location_entry.get_text ());
-					cities_search.location_entry.hide ();
-				}
-				return false;
-			});
-		}
+		cities_search.location_entry.activate.connect ((obj) => {
+			button_label.set_text (cities_search.location_entry.get_text ());
+			labels_grid.face1_label.set_text (cities_search.location_entry.get_text ());
+			if (this.get_active ()) {
+				this.set_active (false);
+			}
+		});
 		
 		popover = new Gtk.Popover (this);
-		popover.width_request = 310;
 		popover.add (cities_search);
 	}
 }

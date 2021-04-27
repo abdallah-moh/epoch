@@ -14,7 +14,7 @@ public class Epoch.CitiesSearch : Gtk.Grid {
         
         attach (location_entry, 0, 0);
         
-        location_entry.show ();
+        location_entry.show_all ();
 	}
 	
 	private void location_defined () {

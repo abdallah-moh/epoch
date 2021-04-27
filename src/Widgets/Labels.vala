@@ -64,7 +64,7 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         }
         
     
-    // Get the users location    
+    // Get the users location
     public async void seek () {
         try {
             simple = yield new GClue.Simple ("com.github.Suzie97.epoch", GClue.AccuracyLevel.CITY, null);
