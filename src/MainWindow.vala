@@ -31,18 +31,18 @@ public class Epoch.MainWindow : Gtk.ApplicationWindow {
             // deletable: false,
             icon_name: "com.github.Suzie97.epoch",
             resizable: false,
-            title: _("Epoch"),
+            // title: _("Epoch"),
             width_request: 500
         );
         
-        // Handle dragging the entire widget
-        button_press_event.connect ((e) => {
-            if (e.button == Gdk.BUTTON_PRIMARY) {
-                begin_move_drag ((int) e.button, (int) e.x_root, (int) e.y_root, e.time);
-                return true;
-            }
-            return false;
-        });
+        // // Handle dragging the entire widget
+        // button_press_event.connect ((e) => {
+        //     if (e.button == Gdk.BUTTON_PRIMARY) {
+        //         begin_move_drag ((int) e.button, (int) e.x_root, (int) e.y_root, e.time);
+        //         return true;
+        //     }
+        //     return false;
+        // });
     }
     
     construct {
@@ -50,8 +50,8 @@ public class Epoch.MainWindow : Gtk.ApplicationWindow {
         set_keep_below (true);
         stick ();
         
-        var preferences_button = new Gtk.Button.from_icon_name ("open-menu-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
-        preferences_button.valign = Gtk.Align.CENTER;
+        // var preferences_button = new Gtk.Button.from_icon_name ("open-menu-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+        // preferences_button.valign = Gtk.Align.CENTER;
         
         preferences_view = new Epoch.PreferencesView ();
         main_view = new Epoch.MainView ();
@@ -75,12 +75,23 @@ public class Epoch.MainWindow : Gtk.ApplicationWindow {
         var headerbar_style_context = headerbar.get_style_context ();
         headerbar_style_context.add_class ("default-decoration");
         headerbar_style_context.add_class (Gtk.STYLE_CLASS_FLAT);
-        
-        headerbar.pack_end (preferences_button);
+
+        // headerbar.pack_end (preferences_button);
         
         set_titlebar (headerbar);
         
-        add (main_grid);
+        // add (main_grid);
+        
+        var handle = new Gtk.EventBox () {
+            margin_start = 3,
+            margin_end = 3
+        };
+        handle.add_events (Gdk.EventMask.ENTER_NOTIFY_MASK | Gdk.EventMask.LEAVE_NOTIFY_MASK);
+        handle.add (main_grid);
+        
+        // add (handle);
+        // headerbar.add (handle);
+        headerbar.set_custom_title (handle);
         
         settings = new GLib.Settings ("com.github.Suzie97.epoch");
         
@@ -90,11 +101,25 @@ public class Epoch.MainWindow : Gtk.ApplicationWindow {
             return before_destroy ();
         });
         
+        main_view.close_button.clicked.connect (() => {
+            destroy ();
+        });
+        
         show_all ();
         
-        preferences_button.clicked.connect (() => {
+        handle.enter_notify_event.connect ((event) => {
+            main_view.close_button_revealer.reveal_child = true;
+            main_view.preferences_button_revealer.reveal_child = true;
+        });
+        
+        handle.leave_notify_event.connect ((event) => {
+            main_view.close_button_revealer.reveal_child = false;
+            main_view.preferences_button_revealer.reveal_child = false;
+        });
+        
+        main_view.preferences_button.clicked.connect (() => {
             content_area.visible_child = preferences_view;
-            preferences_button.visible = false;
+            main_view.preferences_button.visible = false;
             preferences_view.stick_switch.notify["active"].connect (() => {
                 if (preferences_view.stick_switch.active) {
                     unstick ();
@@ -106,7 +131,7 @@ public class Epoch.MainWindow : Gtk.ApplicationWindow {
         
         preferences_view.done_button.clicked.connect (() => {
             content_area.visible_child = main_view;
-            preferences_button.visible = true;
+            main_view.preferences_button.visible = true;
         });
     }
 

@@ -19,20 +19,15 @@
 */
 
 public class Application : Gtk.Application {
-    // public GLib.Settings settings = null;
     
     public Application () {
         Object (
             application_id: "com.github.Suzie97.epoch",
             flags: ApplicationFlags.FLAGS_NONE
         );
-        
-        // settings = new GLib.Settings ("org.gnome.GWeather");
     }
     
     protected override void activate () {
-        Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = true;
-        
         var app_window = new Epoch.MainWindow (this);
         
         app_window.show ();
