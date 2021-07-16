@@ -48,6 +48,7 @@ public class Epoch.MainView : Gtk.Grid {
         var grid_face1 = new Gtk.Grid ();
         grid_face1.attach (clock_face1, 0, 0);
         grid_face1.attach (labels.face1_label, 0, 1);
+        grid_face1.attach (labels.time1_label, 0, 2);
 
         var grid_face2 = new Gtk.Grid ();
         grid_face2.attach (clock_face2, 1, 0);

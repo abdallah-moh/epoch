@@ -24,6 +24,8 @@ public class Epoch.LabelsGrid : Gtk.Grid {
     public Gtk.Label face3_label;
     public Gtk.Label face4_label;
 
+    public Gtk.Label time1_label;
+
     public GClue.Location? geo_location {get; private set; default = null;}
     public GWeather.Location location;
     private GClue.Simple simple;
@@ -38,6 +40,19 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         face1_label.set_ellipsize (END);
         face1_label.set_max_width_chars (12);
         face1_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+
+        var now = new GLib.DateTime.now_local ();
+        var settings = new GLib.Settings ("org.gnome.desktop.interface");
+        var time_format = Granite.DateTime.get_default_time_format (settings.get_enum ("clock-format") == 1, false);
+
+        time1_label = new Gtk.Label (now.format (time_format)) {
+            halign = Gtk.Align.CENTER,
+            valign = Gtk.Align.CENTER,
+            margin_top = 5
+        };
+        time1_label.get_style_context ().add_class (Granite.STYLE_CLASS_H3_LABEL);
+        time1_label.tooltip_text = time_format;
+        time1_label.xalign = 0;
 
         face2_label = new Gtk.Label ("Paris");
         // face2_label.set_markup ("<span font_desc='Inter 14'><b>Paris</b></span>");
