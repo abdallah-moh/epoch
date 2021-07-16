@@ -31,7 +31,7 @@ executable(
         dependency('granite'),
         dependency('geocode-glib-1.0'),
         dependency('cairo'),
-        # dependency('libhandy-1', version: '>= 1.0.0'),
+        dependency('libhandy-1'),
         meson.get_compiler('c').find_library('m', required: false),
     ],
     install : true

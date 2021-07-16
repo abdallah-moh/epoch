@@ -23,47 +23,51 @@ public class Epoch.LabelsGrid : Gtk.Grid {
     public Gtk.Label face2_label;
     public Gtk.Label face3_label;
     public Gtk.Label face4_label;
-    
+
     public GClue.Location? geo_location {get; private set; default = null;}
     public GWeather.Location location;
     private GClue.Simple simple;
-    
+
     construct {
         seek.begin ();
-        
+
         face1_label = new Gtk.Label ("");
         face1_label.halign = Gtk.Align.CENTER;
         face1_label.hexpand = true;
         face1_label.margin_top = 6;
         face1_label.set_ellipsize (END);
         face1_label.set_max_width_chars (12);
-        
+        face1_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+
         face2_label = new Gtk.Label ("Paris");
-        face2_label.set_markup ("<span font_desc='Inter 14'><b>Paris</b></span>");
+        // face2_label.set_markup ("<span font_desc='Inter 14'><b>Paris</b></span>");
         face2_label.halign = Gtk.Align.CENTER;
         face2_label.hexpand = true;
         face2_label.margin_top = 6;
         face2_label.set_ellipsize (END);
         face2_label.set_max_width_chars (12);
-        
+        face2_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+
         face3_label = new Gtk.Label ("London");
-        face3_label.set_markup ("<span font_desc='Inter 14'><b>Tokyo</b></span>");
+        // face3_label.set_markup ("<span font_desc='Inter 14'><b>Tokyo</b></span>");
         face3_label.halign = Gtk.Align.CENTER;
         face3_label.hexpand = true;
         face3_label.margin_top = 6;
         face3_label.set_ellipsize (END);
         face3_label.set_max_width_chars (12);
-        
+        face3_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+
         face4_label = new Gtk.Label ("New York");
-        face4_label.set_markup ("<span font_desc='Inter 14'><b>New York</b></span>");
+        // face4_label.set_markup ("<span font_desc='Inter 14'><b>New York</b></span>");
         face4_label.halign = Gtk.Align.CENTER;
         face4_label.hexpand = true;
         face4_label.margin_top = 6;
         face4_label.set_ellipsize (END);
         face4_label.set_max_width_chars (12);
+        face4_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
         }
-        
-    
+
+
     // Get the users location
     public async void seek () {
         try {
@@ -72,19 +76,19 @@ public class Epoch.LabelsGrid : Gtk.Grid {
             warning ("Failed to connect to GeoClue2 service: %s", e.message);
             return;
         }
-        
+
         simple.notify["location"].connect (() => {
             on_location_updated.begin ();
         });
 
         on_location_updated.begin ();
     }
-    
+
     public async void on_location_updated () {
         geo_location = simple.get_location ();
-        
+
         location = location.find_nearest_city (geo_location.latitude, geo_location.longitude);
-        
+
         if (location != null) {
             face1_label.label = dgettext ("libgweather-locations", location.get_city_name ());
         }
