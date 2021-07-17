@@ -48,6 +48,11 @@ public class ClockFaces : DrawingArea {
         cr.set_source_rgb (256, 256, 256);
         cr.fill ();
 
+        // Base Circle Border
+        cr.arc (x, y, radius + 2, 0, 2 * Math.PI);
+        cr.set_source_rgb (0, 0, 0);
+        cr.stroke ();
+
         // Center Circle
         cr.set_source_rgb (0, 0, 0);
         cr.set_line_width (1);
