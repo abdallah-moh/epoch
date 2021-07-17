@@ -8,7 +8,7 @@ Easily see the time of different cities across the world, choose the cities whos
 
 ## Made for [elementary OS](https://elementary.io)
 
-Epoch is designed and developed on and for [elementary OS](https://elementary.io). It will be available on AppCenter in the near future. Purchasing through AppCenter directly supports me and elementary. Get it on AppCenter for the best experience.
+Epoch is designed and developed on and for [elementary OS](https://elementary.io). It will be available on [AppCenter](https://appcenter.elementary.io) in the near future. Purchasing through AppCenter directly supports me and elementary. Get it on AppCenter for the best experience.
 
 ## Developing and Building
 
