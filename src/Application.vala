@@ -48,11 +48,10 @@ public class Application : Gtk.Application {
         set_accels_for_action ("app.quit", {"<Control>q"});
 
         quit_action.activate.connect (() => {
-            if (app_window != null) {
-                // app_window.destroy ();
-                app_window.before_destroy ();
+            get_windows ().foreach ((win) => {
+                ((Epoch.MainWindow)win).before_destroy ();
                 app_window.destroy ();
-            }
+            });
         });
     }
 

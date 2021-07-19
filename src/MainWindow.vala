@@ -32,7 +32,8 @@ public class Epoch.MainWindow : Hdy.ApplicationWindow {
             icon_name: "com.github.Suzie97.epoch",
             resizable: false,
             // title: _("Epoch"),
-            width_request: 500
+            width_request: 500,
+            type_hint: Gdk.WindowTypeHint.DIALOG
         );
     }
 
@@ -99,7 +100,7 @@ public class Epoch.MainWindow : Hdy.ApplicationWindow {
             main_view.preferences_button.visible = false;
         });
 
-        preferences_view.stick_switch.notify["active"].connect (() => {
+        preferences_view.workspace_switch.notify["active"].connect (() => {
             desktop_lock ();
         });
 
@@ -110,7 +111,7 @@ public class Epoch.MainWindow : Hdy.ApplicationWindow {
     }
 
     private void desktop_lock () {
-        if (preferences_view.stick_switch.active) {
+        if (preferences_view.workspace_switch.active) {
             unstick ();
         } else {
             stick ();

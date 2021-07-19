@@ -1,46 +1,60 @@
 public class Epoch.PreferencesView : Gtk.Grid {
-    private Epoch.CitiesChooser cities_chooser1;
-    private Epoch.CitiesChooser cities_chooser2;
-    private Epoch.CitiesChooser cities_chooser3;
-    private Epoch.CitiesChooser cities_chooser4;
 
     public Gtk.Button done_button;
-    private Gtk.Button add_clock_button;
+    private Epoch.TimeZonePicker time_zone_picker;
 
-    public Granite.ModeSwitch stick_switch;
+    // public Granite.ModeSwitch stick_switch;
+    public Gtk.Switch workspace_switch;
 
     construct {
         margin = 24;
         hexpand = true;
         vexpand = true;
         halign = Gtk.Align.CENTER;
-        valign = Gtk.Align.CENTER;
+        row_spacing = 12;
 
-        cities_chooser1 = new Epoch.CitiesChooser ();
-        cities_chooser2 = new Epoch.CitiesChooser ();
-        cities_chooser3 = new Epoch.CitiesChooser ();
-        cities_chooser4 = new Epoch.CitiesChooser ();
+        var city_label = new Gtk.Label (_("City:")) {
+            margin_end = 10,
+            halign = Gtk.Align.END
+        };
 
-        add_clock_button = new Gtk.Button.from_icon_name ("list-add-symbolic", Gtk.IconSize.MENU);
-        add_clock_button.tooltip_text = _("Add Clock");
-        add_clock_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+        var time_format = new Granite.Widgets.ModeButton ();
+        time_format.append_text (_("Dimapur"));
+        time_format.append_text (_("Paris"));
+        time_format.append_text (_("Tokyo"));
+        time_format.append_text (_("New York"));
+
+        var time_zone_label = new Gtk.Label (_("Time Zone:")) {
+            margin_end = 10,
+            halign = Gtk.Align.END
+        };
+
+        time_zone_picker = new Epoch.TimeZonePicker () {
+            hexpand = true,
+        };
+        time_zone_picker.get_style_context ().add_class (Gtk.STYLE_CLASS_FRAME);
+
+        var workspace_label = new Gtk.Label (_("Stick to one workspace:")) {
+            margin_end = 10,
+            halign = Gtk.Align.END
+        };
+
+        workspace_switch = new Gtk.Switch () {
+            halign = Gtk.Align.START,
+            valign = Gtk.Align.CENTER
+        };
 
         done_button = new Gtk.Button.with_label (_("Done")) {
             margin_top = 5
         };
         done_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
 
-        stick_switch = new Granite.ModeSwitch.from_icon_name ("view-paged-symbolic", "computer-symbolic") {
-            primary_icon_tooltip_text = _("View on all desktops"),
-            secondary_icon_tooltip_text = _("View on one desktop"),
-            margin_top = 5
-        };
-
-        attach (cities_chooser1, 0, 0);
-        attach (cities_chooser2, 1, 0);
-        attach (cities_chooser3, 2, 0);
-        attach (cities_chooser4, 3, 0);
-        attach (stick_switch, 0, 1);
-        attach (done_button, 3, 1);
+        attach (city_label, 0, 0);
+        attach (time_format, 1, 0, 3);
+        attach (time_zone_label, 0, 1);
+        attach (time_zone_picker, 1, 1, 3);
+        attach (workspace_label, 0, 2);
+        attach (workspace_switch, 1, 2);
+        attach (done_button, 3, 3);
     }
 }

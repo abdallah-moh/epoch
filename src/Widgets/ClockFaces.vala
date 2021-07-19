@@ -24,24 +24,22 @@ using Gtk;
 
 public class ClockFaces : DrawingArea {
 
-    private Time time ;
-    private int minute_offset ;
-
-    public signal void time_changed (int hour, int minute) ;
+    private Time time;
+    private int minute_offset;
 
      public ClockFaces () {
-        update () ;
+        update ();
 
-        Timeout.add (1000, update) ;
+        Timeout.add (1000, update);
 
-        set_size_request (100, 100) ;
+        set_size_request (100, 100);
     }
 
     public override bool draw (Cairo.Context cr) {
-        int y = get_allocated_height () / 2 ;
-        int x = get_allocated_width ()  / 2 ;
+        int y = get_allocated_height () / 2;
+        int x = get_allocated_width ()  / 2;
         var radius = double.min (get_allocated_width () / 2,
-                                 get_allocated_height () / 2) - 5 ;
+                                 get_allocated_height () / 2) - 5;
 
         // Base Circle
         cr.arc (x, y, radius, 0, 2 * Math.PI);
@@ -70,7 +68,7 @@ public class ClockFaces : DrawingArea {
             } else {
                 inset = (int) (0.1 * radius);
                 /* line width is temporary, replace with numbers when possible */
-                // cr.set_line_width (0.5 * cr.get_line_width ()) ;
+                // cr.set_line_width (0.5 * cr.get_line_width ());
                 // cr.set_line_width (0);
             }
 
@@ -85,14 +83,14 @@ public class ClockFaces : DrawingArea {
         }
 
         // Clock Hands
-        var hours = this.time.hour ;
-        var minutes = this.time.minute + this.minute_offset ;
-        var seconds = this.time.second ;
+        var hours = this.time.hour;
+        var minutes = this.time.minute + this.minute_offset;
+        var seconds = this.time.second;
 
         /* Hour Hand: the hour hand is rotated 30 degrees (pi/6r) per hour + 1/2 a degree (pi/360r) per minute */
-        cr.save () ;
+        cr.save ();
         cr.set_line_width (3); //subject to change
-        cr.move_to (x, y) ;
+        cr.move_to (x, y);
         cr.line_to (x + radius / 2 * Math.sin (Math.PI / 6 * hours
                                              + Math.PI / 360 * minutes),
                     y + radius / 2 * Math.cos (Math.PI / 6 * hours
@@ -115,7 +113,7 @@ public class ClockFaces : DrawingArea {
         cr.stroke ();
         cr.restore ();
 
-        return false ;
+        return false;
     }
 
     private bool update () {

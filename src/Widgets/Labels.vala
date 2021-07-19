@@ -33,14 +33,47 @@ public class Epoch.LabelsGrid : Gtk.Grid {
     construct {
         seek.begin ();
 
-        face1_label = new Gtk.Label ("");
-        face1_label.halign = Gtk.Align.CENTER;
-        face1_label.hexpand = true;
-        face1_label.margin_top = 6;
-        face1_label.set_ellipsize (END);
-        face1_label.set_max_width_chars (12);
+        face1_label = new Gtk.Label ("") {
+            halign = Gtk.Align.CENTER,
+            hexpand = true,
+            margin_top = 6,
+            ellipsize = END,
+            max_width_chars = 7
+        };
         face1_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
+        update_time ();
+
+        face2_label = new Gtk.Label ("Paris") {
+            halign = Gtk.Align.CENTER,
+            hexpand = true,
+            margin_top = 6,
+            ellipsize = END,
+            max_width_chars = 7
+        };
+        face2_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+
+        face3_label = new Gtk.Label ("Tokyo") {
+            halign = Gtk.Align.CENTER,
+            hexpand = true,
+            margin_top = 6,
+            ellipsize = END,
+            max_width_chars = 8
+        };
+        face3_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+
+        face4_label = new Gtk.Label ("New York") {
+            halign = Gtk.Align.CENTER,
+            hexpand = true,
+            margin_top = 6,
+            ellipsize = END,
+            max_width_chars = 8
+        };
+        face4_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+    }
+
+
+    public bool update_time () {
         var now = new GLib.DateTime.now_local ();
         var settings = new GLib.Settings ("org.gnome.desktop.interface");
         var time_format = Granite.DateTime.get_default_time_format (settings.get_enum ("clock-format") == 1, false);
@@ -54,34 +87,8 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         time1_label.tooltip_text = time_format;
         time1_label.xalign = 0;
 
-        face2_label = new Gtk.Label ("Paris");
-        // face2_label.set_markup ("<span font_desc='Inter 14'><b>Paris</b></span>");
-        face2_label.halign = Gtk.Align.CENTER;
-        face2_label.hexpand = true;
-        face2_label.margin_top = 6;
-        face2_label.set_ellipsize (END);
-        face2_label.set_max_width_chars (12);
-        face2_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
-
-        face3_label = new Gtk.Label ("London");
-        // face3_label.set_markup ("<span font_desc='Inter 14'><b>Tokyo</b></span>");
-        face3_label.halign = Gtk.Align.CENTER;
-        face3_label.hexpand = true;
-        face3_label.margin_top = 6;
-        face3_label.set_ellipsize (END);
-        face3_label.set_max_width_chars (12);
-        face3_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
-
-        face4_label = new Gtk.Label ("New York");
-        // face4_label.set_markup ("<span font_desc='Inter 14'><b>New York</b></span>");
-        face4_label.halign = Gtk.Align.CENTER;
-        face4_label.hexpand = true;
-        face4_label.margin_top = 6;
-        face4_label.set_ellipsize (END);
-        face4_label.set_max_width_chars (12);
-        face4_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
-        }
-
+        return true;
+    }
 
     // Get the users location
     public async void seek () {
