@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-    <schema path="/com/github/Suzie97/epoch/" id="com.github.Suzie97.epoch">
-        <key name="pos-x" type="i">
-            <default>1000</default>
-            <summary>Horizontal Position</summary>
-            <description>Horizontal Position of Epoch</description>
-        </key>
-        <key name="pos-y" type="i">
-            <default>5</default>
-            <summary>Vertical Position</summary>
-            <description>Vertical Position of Epoch</description>
-        </key>
-    </schema>
+  <schema path="/com/github/Suzie97/epoch/" id="com.github.Suzie97.epoch">
+    <key name="pos-x" type="i">
+      <default>1000</default>
+      <summary>Horizontal Position</summary>
+      <description>Horizontal Position of Epoch</description>
+    </key>
+
+    <key name="pos-y" type="i">
+      <default>5</default>
+      <summary>Vertical Position</summary>
+      <description>Vertical Position of Epoch</description>
+    </key>
+
+    <key name="workspace-stick" type="b">
+      <default>true</default>
+      <summary>Show on a single or multiple workspaces</summary>
+      <description>Show on a single or multiple workspaces</description>
+    </key>
+  </schema>
 </schemalist>

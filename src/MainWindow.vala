@@ -28,12 +28,9 @@ public class Epoch.MainWindow : Hdy.ApplicationWindow {
     public MainWindow (Application app) {
         Object (
             application: app,
-            // deletable: false,
             icon_name: "com.github.Suzie97.epoch",
             resizable: false,
-            // title: _("Epoch"),
-            width_request: 500,
-            type_hint: Gdk.WindowTypeHint.DIALOG
+            width_request: 500
         );
     }
 
@@ -103,6 +100,8 @@ public class Epoch.MainWindow : Hdy.ApplicationWindow {
         preferences_view.workspace_switch.notify["active"].connect (() => {
             desktop_lock ();
         });
+
+        settings.bind ("workspace-stick", preferences_view.workspace_switch, "active", GLib.SettingsBindFlags.DEFAULT);
 
         preferences_view.done_button.clicked.connect (() => {
             content_area.visible_child = main_view;

@@ -1,10 +1,15 @@
 public class Epoch.PreferencesView : Gtk.Grid {
+    private static GLib.Settings settings;
 
     public Gtk.Button done_button;
     private Epoch.TimeZonePicker time_zone_picker;
 
     // public Granite.ModeSwitch stick_switch;
     public Gtk.Switch workspace_switch;
+
+    static construct {
+        settings = new Settings ("com.github.Suzie97.epoch");
+    }
 
     construct {
         margin = 24;
@@ -34,7 +39,7 @@ public class Epoch.PreferencesView : Gtk.Grid {
         };
         time_zone_picker.get_style_context ().add_class (Gtk.STYLE_CLASS_FRAME);
 
-        var workspace_label = new Gtk.Label (_("Stick to one workspace:")) {
+        var workspace_label = new Gtk.Label (_("Show on one workspace:")) {
             margin_end = 10,
             halign = Gtk.Align.END
         };
