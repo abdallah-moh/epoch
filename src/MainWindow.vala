@@ -77,6 +77,7 @@ public class Epoch.MainWindow : Hdy.ApplicationWindow {
         });
 
         main_view.close_button.clicked.connect (() => {
+            before_destroy ();
             destroy ();
         });
 

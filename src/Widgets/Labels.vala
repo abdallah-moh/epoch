@@ -26,6 +26,10 @@ public class Epoch.LabelsGrid : Gtk.Grid {
 
     public Gtk.Label time1_label;
 
+    private GLib.DateTime now;
+
+    private signal void minute_changed ();
+
     public GClue.Location? geo_location {get; private set; default = null;}
     public GWeather.Location location;
     private GClue.Simple simple;
@@ -44,7 +48,7 @@ public class Epoch.LabelsGrid : Gtk.Grid {
 
         update_time ();
 
-        face2_label = new Gtk.Label ("Paris") {
+        face2_label = new Gtk.Label ("Cairo") {
             halign = Gtk.Align.CENTER,
             hexpand = true,
             margin_top = 6,
@@ -53,7 +57,7 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         };
         face2_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
-        face3_label = new Gtk.Label ("Tokyo") {
+        face3_label = new Gtk.Label ("London") {
             halign = Gtk.Align.CENTER,
             hexpand = true,
             margin_top = 6,
@@ -62,7 +66,7 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         };
         face3_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
-        face4_label = new Gtk.Label ("New York") {
+        face4_label = new Gtk.Label ("Berlin") {
             halign = Gtk.Align.CENTER,
             hexpand = true,
             margin_top = 6,
@@ -72,13 +76,22 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         face4_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
     }
 
+    private uint calculate_time_until_next_minute () {
+        if (now == null) {
+            return 60 * 1000;
+        }
 
-    public bool update_time () {
-        var now = new GLib.DateTime.now_local ();
+        var seconds_until_next_minute = 60 - (now.to_unix () % 60);
+
+        return (uint)seconds_until_next_minute * 1000;
+    }
+
+    public void update_time () {
+        now = new GLib.DateTime.now_local ();
         var settings = new GLib.Settings ("org.gnome.desktop.interface");
         var time_format = Granite.DateTime.get_default_time_format (settings.get_enum ("clock-format") == 1, false);
 
-        time1_label = new Gtk.Label (now.format (time_format)) {
+        time1_label = new Gtk.Label ("") {
             halign = Gtk.Align.CENTER,
             valign = Gtk.Align.CENTER,
             margin_top = 5
@@ -87,7 +100,16 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         time1_label.tooltip_text = time_format;
         time1_label.xalign = 0;
 
-        return true;
+        time1_label.label = now.format (time_format);
+
+        uint interval = calculate_time_until_next_minute ();
+
+        Timeout.add (interval, () => {
+            now = new GLib.DateTime.now_local ();
+            time1_label.label = now.format (time_format);
+
+            return true;
+        });
     }
 
     // Get the users location
