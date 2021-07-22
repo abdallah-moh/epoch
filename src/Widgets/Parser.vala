@@ -1,3 +1,8 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: 2021 Your Name <singharajdeep97@gmail.com>
+ */
+
 public class Epoch.Parser : GLib.Object {
     List<string> lines;
     private static Parser? parser = null;

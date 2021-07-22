@@ -1,3 +1,8 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: 2021 Your Name <singharajdeep97@gmail.com>
+ */
+
 public class Epoch.TimeZonePicker : Gtk.Grid {
     public signal void request_timezone_change (string tz);
 

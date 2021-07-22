@@ -1,10 +1,14 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: 2021 Your Name <singharajdeep97@gmail.com>
+ */
+
 public class Epoch.PreferencesView : Gtk.Grid {
     private static GLib.Settings settings;
 
     public Gtk.Button done_button;
     private Epoch.TimeZonePicker time_zone_picker;
 
-    // public Granite.ModeSwitch stick_switch;
     public Gtk.Switch workspace_switch;
 
     static construct {

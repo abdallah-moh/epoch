@@ -1,3 +1,8 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: 2021 Your Name <singharajdeep97@gmail.com>
+ */
+
 public class Epoch.MainView : Gtk.Grid {
     public Gtk.Button preferences_button;
     public Gtk.Button close_button;
@@ -29,13 +34,13 @@ public class Epoch.MainView : Gtk.Grid {
         close_button_revealer.add (close_button);
 
         var preferences_button_grid = new Gtk.Grid () {
-            margin_top = 5,
+            margin_top = 4,
             margin_left = 0
         };
         preferences_button_grid.add (preferences_button_revealer);
 
         var close_button_grid = new Gtk.Grid () {
-            margin_top = 5,
+            margin_top = 4,
             margin_right = 0
         };
         close_button_grid.add (close_button_revealer);
@@ -49,6 +54,7 @@ public class Epoch.MainView : Gtk.Grid {
         grid_face1.attach (clock_face1, 0, 0);
         grid_face1.attach (labels.face1_label, 0, 1);
         grid_face1.attach (labels.time1_label, 0, 2);
+        grid_face1.attach (labels.day1_label, 0, 3);
 
         var grid_face2 = new Gtk.Grid ();
         grid_face2.attach (clock_face2, 1, 0);
@@ -65,7 +71,7 @@ public class Epoch.MainView : Gtk.Grid {
         var grid = new Gtk.Grid () {
             column_spacing = 12,
             margin_top = 24,
-            margin_bottom = 24
+            margin_bottom = 15
         };
         grid.attach (grid_face1, 0, 1, 1, 2);
         grid.attach (grid_face2, 1, 1, 1, 2);
