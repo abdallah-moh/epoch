@@ -1,22 +1,7 @@
 /*
-* Copyright (c) 2021 Rajdeep Singha (singharajdeep97@gmail.com)
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public
-* License as published by the Free Software Foundation; either
-* version 3 of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* General Public License for more details.
-*
-* You should have received a copy of the GNU General Public
-* License along with this program; if not, write to the
-* Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-* Boston, MA 02110-1301 USA
-*
-*/
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: 2021 Your Name <singharajdeep97@gmail.com>
+ */
 
 public class Epoch.LabelsGrid : Gtk.Grid {
     public Gtk.Label face1_label;
@@ -26,9 +11,9 @@ public class Epoch.LabelsGrid : Gtk.Grid {
 
     public Gtk.Label time1_label;
 
-    private GLib.DateTime now;
+    public Gtk.Label day1_label;
 
-    private signal void minute_changed ();
+    private GLib.DateTime now;
 
     public GClue.Location? geo_location {get; private set; default = null;}
     public GWeather.Location location;
@@ -37,7 +22,7 @@ public class Epoch.LabelsGrid : Gtk.Grid {
     construct {
         seek.begin ();
 
-        face1_label = new Gtk.Label ("") {
+        face1_label = new Gtk.Label ("Dimapur") {
             halign = Gtk.Align.CENTER,
             hexpand = true,
             margin_top = 6,
@@ -45,8 +30,6 @@ public class Epoch.LabelsGrid : Gtk.Grid {
             max_width_chars = 7
         };
         face1_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
-
-        update_time ();
 
         face2_label = new Gtk.Label ("Cairo") {
             halign = Gtk.Align.CENTER,
@@ -74,6 +57,8 @@ public class Epoch.LabelsGrid : Gtk.Grid {
             max_width_chars = 8
         };
         face4_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+
+        update_day_time ();
     }
 
     private uint calculate_time_until_next_minute () {
@@ -86,27 +71,73 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         return (uint)seconds_until_next_minute * 1000;
     }
 
-    public void update_time () {
+    public void update_day_time () {
         now = new GLib.DateTime.now_local ();
         var settings = new GLib.Settings ("org.gnome.desktop.interface");
         var time_format = Granite.DateTime.get_default_time_format (settings.get_enum ("clock-format") == 1, false);
+        var day_format = Granite.DateTime.get_default_date_format (true, false, false);
 
         time1_label = new Gtk.Label ("") {
             halign = Gtk.Align.CENTER,
-            valign = Gtk.Align.CENTER,
-            margin_top = 5
+            valign = Gtk.Align.CENTER
         };
         time1_label.get_style_context ().add_class (Granite.STYLE_CLASS_H3_LABEL);
-        time1_label.tooltip_text = time_format;
         time1_label.xalign = 0;
 
         time1_label.label = now.format (time_format);
+
+        day1_label = new Gtk.Label ("") {
+            halign = Gtk.Align.CENTER,
+            valign = Gtk.Align.CENTER
+        };
+        day1_label.get_style_context ().add_class (Granite.STYLE_CLASS_H4_LABEL);
+        day1_label.xalign = 0;
+
+        string weekday = now.format (day_format);
+
+        if (weekday == "Sun") {
+            day1_label.label = "Sunday";
+        } if (weekday == "Mon") {
+            day1_label.label = "Monday";
+        } if (weekday == "Tue") {
+            day1_label.label = "Tuesday";
+        } if (weekday == "Wed") {
+            day1_label.label = "Wednesday";
+        } if (weekday == "Thu") {
+            day1_label.label = "Thursday";
+        } if (weekday == "Fri") {
+            day1_label.label = "Friday";
+        } if (weekday == "Sat") {
+            day1_label.label = "Saturday";
+        }
+
+        // day1_label.label = now.format (day_format);
 
         uint interval = calculate_time_until_next_minute ();
 
         Timeout.add (interval, () => {
             now = new GLib.DateTime.now_local ();
             time1_label.label = now.format (time_format);
+
+            string weekday1 = now.format (day_format);
+
+            if (weekday1 == "Sun") {
+                day1_label.label = "Sunday";
+            } if (weekday1 == "Mon") {
+                day1_label.label = "Monday";
+            } if (weekday1 == "Tue") {
+                day1_label.label = "Tuesday";
+            } if (weekday1 == "Wed") {
+                day1_label.label = "Wednesday";
+            } if (weekday1 == "Thu") {
+                day1_label.label = "Thursday";
+            } if (weekday1 == "Fri") {
+                day1_label.label = "Friday";
+            } if (weekday1 == "Sat") {
+                day1_label.label = "Saturday";
+            }
+
+            // day1_label.label = now.format (day_format);
 
             return true;
         });
