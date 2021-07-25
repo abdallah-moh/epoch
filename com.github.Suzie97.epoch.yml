@@ -1,0 +1,51 @@
+# This is the same ID used in meson.build and other files
+app-id: com.github.Suzie97.epoch
+
+# Instead of manually specifying a long list of build and runtime dependencies,
+# we can use a convenient pre-made runtime and SDK.
+runtime: io.elementary.Platform
+runtime-version: 'daily'
+sdk: io.elementary.Sdk
+
+# This should match the exec line in the .desktop file and usually is the same
+# as the app ID
+command: com.github.Suzie97.epoch
+
+# Here we can specify the kinds of permissions the app needs to run. Since we're
+# not using hardware like webcams, making sound, or reading external files,
+# only permission to draw our app on screen using either X11 or Wayland is needed.
+finish-args:
+  - '--share=ipc'
+  - '--socket=fallback-x11'
+  - '--socket=wayland'
+  - '--share=network'
+  - '--system-talk-name=org.freedesktop.GeoClue2'
+
+# This section is where all the source code required to build the app is listed.
+# If we had external dependencies that weren't included in our SDK, they would be listed
+# here.
+modules:
+  - name: geocode-glib
+    config-opts:
+      - '-Denable-installed-tests=false'
+      - '-Denable-gtk-doc=false'
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/geocode-glib.git
+        tag: '3.26.2'
+
+  - name: gweather
+    config-opts:
+      - '-Dgtk_doc=false'
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/libgweather.git
+        tag: '40.0'
+
+  - name: epoch
+    buildsystem: meson
+    sources:
+      - type: dir
+        path: .

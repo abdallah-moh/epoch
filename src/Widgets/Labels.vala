@@ -82,6 +82,13 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         // clock_settings.bind ("clock-show-seconds", this, "clock-show-seconds", SettingsBindFlags.DEFAULT);
 
         update_day_time ();
+
+        // var clock_settings = new GLib.Settings ("org.gnome.desktop.interface");
+        //     clock_settings.changed["clock-format"].connect (() => {
+        //         is_12h = ("12h" in clock_settings.get_string ("clock-format"));
+        //     });
+
+        // is_12h = ("12h" in clock_settings.get_string ("clock-format"));
     }
 
     private uint calculate_time_until_next_minute () {
@@ -100,7 +107,9 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         var time_format = Granite.DateTime.get_default_time_format (settings.get_enum ("clock-format") == 1, false);
         var day_format = Granite.DateTime.get_default_date_format (true, false, false);
 
-        time1_label.label = now.format (time_format);
+        string current_time1 = now.format (time_format);
+
+        time1_label.label = current_time1;
 
         day1_label = new Gtk.Label ("") {
             halign = Gtk.Align.CENTER,
@@ -141,7 +150,8 @@ public class Epoch.LabelsGrid : Gtk.Grid {
 
         Timeout.add (interval, () => {
             now = new GLib.DateTime.now_local ();
-            time1_label.label = now.format (time_format);
+            string current_time2 = now.format (time_format);
+            time1_label.label = current_time2;
 
             string weekday1 = now.format (day_format);
 
@@ -173,7 +183,8 @@ public class Epoch.LabelsGrid : Gtk.Grid {
 
             Timeout.add (interval1, () => {
                 now = new GLib.DateTime.now_local ();
-                time1_label.label = now.format (time_format);
+                string current_time3 = now.format (time_format);
+                time1_label.label = current_time3;
 
                 string weekday2 = now.format (day_format);
 
