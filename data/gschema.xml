@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
+  <enum id="com.github.Suzie97.epoch.clock-formats">
+    <value nick="12h" value="0" />
+    <value nick="24h" value="1" />
+    <!--<value nick="ISO8601" value="2" />-->
+  </enum>
   <schema path="/com/github/Suzie97/epoch/" id="com.github.Suzie97.epoch">
     <key name="pos-x" type="i">
       <default>1000</default>
@@ -18,5 +23,17 @@
       <summary>Show on a single or multiple workspaces</summary>
       <description>Show on a single or multiple workspaces</description>
     </key>
+
+    <key name="clock-format" enum="com.github.Suzie97.epoch.clock-formats">
+      <default>"12h"</default>
+      <summary>(DEPRECATED) Whether the clock displays in 12h, 24h, or ISO format</summary>
+      <description>This key is deprecated and is now ignored unless ISO format is selected.</description>
+    </key>
+
+    <!--<key type="b" name="clock-show-seconds">-->
+    <!--  <default>false</default>-->
+    <!--  <summary>If this is set to true, seconds will be shown in the clock</summary>-->
+    <!--  <description>If this is set to true, seconds will be shown in the clock</description>-->
+    <!--</key>-->
   </schema>
 </schemalist>
