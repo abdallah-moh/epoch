@@ -2,7 +2,7 @@
   <img src="data/128.svg" alt="Icon" />
 </p>
 <h1 align="center">Epoch</h1>
-<h2 align="center">Keep Track of Time in Different Cities Across the World</h2>
+<h2 align="center">Keep track of the time in different cities across the world</h2>
 
 Easily see the time of different cities across the world, choose the cities whose time you want to keep track of and pin the widget on multiple workspaces or just a single workspace.
 
