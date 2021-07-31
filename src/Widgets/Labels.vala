@@ -47,7 +47,7 @@ public class Epoch.LabelsGrid : Gtk.Grid {
         };
         face1_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
-        time1_label = new Gtk.Label (time_zone_picker.current_tz) {
+        time1_label = new Gtk.Label ("") {
             halign = Gtk.Align.CENTER,
             valign = Gtk.Align.CENTER
         };
