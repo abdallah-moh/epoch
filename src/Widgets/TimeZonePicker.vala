@@ -20,7 +20,7 @@ public class Epoch.TimeZonePicker : Gtk.Grid {
     Gtk.TreeView city_view;
     Gtk.ListStore city_list_store;
     string old_selection;
-    string current_tz;
+    public string current_tz;
     bool setting_cities = false;
 
     public string time_zone {
@@ -105,13 +105,16 @@ public class Epoch.TimeZonePicker : Gtk.Grid {
                 return;
 
             Gtk.TreeIter activated_iter;
-            if (city_view.get_selection ().get_selected (null, out activated_iter)) {
+            Gtk.TreeModel model;
+            if (city_view.get_selection ().get_selected (out model, out activated_iter)) {
                 Value value;
                 city_list_store.get_value (activated_iter, 1, out value);
                 request_timezone_change (value.get_string ());
                 current_tz = value.get_string ();
             }
         });
+
+        var label = new Gtk.Label (current_tz);
 
         var city_scrolled = new Gtk.ScrolledWindow (null, null);
         city_scrolled.add (city_view);
@@ -121,6 +124,7 @@ public class Epoch.TimeZonePicker : Gtk.Grid {
         main_grid.add (continent_view);
         main_grid.add (new Gtk.Separator (Gtk.Orientation.VERTICAL));
         main_grid.add (city_scrolled);
+        main_grid.add (label);
         main_grid.show_all ();
 
         add (main_grid);
