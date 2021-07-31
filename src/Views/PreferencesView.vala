@@ -82,7 +82,6 @@ public class Epoch.PreferencesView : Gtk.Grid {
 
         done_button = new Gtk.Button.with_label (_("Done")) {
             margin_top = 5
-            // halign = Gtk.Align.END
         };
         done_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
 
