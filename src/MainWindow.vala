@@ -29,7 +29,7 @@ public class Epoch.MainWindow : Hdy.ApplicationWindow {
         main_view = new Epoch.MainView ();
 
         var content_area = new Gtk.Stack () {
-            transition_type = Gtk.StackTransitionType.CROSSFADE,
+            transition_type = Gtk.StackTransitionType.SLIDE_LEFT_RIGHT,
             vhomogeneous = false
         };
         content_area.add (main_view);
