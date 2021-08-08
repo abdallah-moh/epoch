@@ -18,8 +18,6 @@ If you want to hack on and build Epoch yourself, you'll need the following depen
 * `libgtk-3-dev`
 * `libhandy-1-dev`
 * `cairo`
-* `libgeoclue-2-dev`
-* `libgweather-3-dev`
 * `meson`
 * `valac`
 
