@@ -18,14 +18,13 @@ If you want to hack on and build Epoch yourself, you'll need the following depen
 * `libgtk-3-dev`
 * `libhandy-1-dev`
 * `cairo`
-* `libgeoclue-2-dev`
-* `libgweather-3-dev`
 * `meson`
 * `valac`
 
 Run `meson build` to configure the build environment, use `ninja install` to install the app and then execute with `./com.github.Suzie97.epoch`
-
-    meson build --prefix=/usr
-    cd build
-    sudo ninja install
-    ./com.github.Suzie97.epoch
+```bash
+meson build --prefix=/usr
+cd build
+sudo ninja install
+./com.github.Suzie97.epoch
+```
