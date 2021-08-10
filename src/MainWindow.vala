@@ -15,7 +15,8 @@ public class Epoch.MainWindow : Hdy.ApplicationWindow {
             application: app,
             icon_name: "com.github.Suzie97.epoch",
             resizable: false,
-            width_request: 500
+            width_request: 500,
+            type_hint: Gdk.WindowTypeHint.DIALOG
         );
     }
 
@@ -89,7 +90,7 @@ public class Epoch.MainWindow : Hdy.ApplicationWindow {
 
         settings.bind ("workspace-stick", preferences_view.workspace_switch, "active", GLib.SettingsBindFlags.DEFAULT);
 
-        preferences_view.done_button.clicked.connect (() => {
+        preferences_view.back_button.clicked.connect (() => {
             content_area.visible_child = main_view;
             main_view.preferences_button.visible = true;
         });

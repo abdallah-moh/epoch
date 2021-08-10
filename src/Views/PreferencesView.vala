@@ -6,7 +6,7 @@
 public class Epoch.PreferencesView : Gtk.Grid {
     private static GLib.Settings settings;
 
-    public Gtk.Button done_button;
+    public Gtk.Button back_button;
     private Epoch.TimeZonePicker time_zone_picker;
 
     public Gtk.Switch workspace_switch;
@@ -80,10 +80,7 @@ public class Epoch.PreferencesView : Gtk.Grid {
         };
         workspace_help_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-        done_button = new Gtk.Button.with_label (_("Done")) {
-            margin_top = 5
-        };
-        done_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+        back_button = new Gtk.Button.with_label (_("Back"));
 
         attach (clock_label, 0, 0);
         attach (timezone_chooser, 1, 0, 3);
@@ -91,7 +88,7 @@ public class Epoch.PreferencesView : Gtk.Grid {
         attach (time_zone_picker, 1, 1, 3);
         attach (workspace_label, 0, 2);
         attach (workspace_switch, 1, 2);
-        attach (workspace_help_label, 1, 3);
-        attach (done_button, 2, 4);
+        attach (workspace_help_label, 1, 3, 2);
+        attach (back_button, 2, 4);
     }
 }
