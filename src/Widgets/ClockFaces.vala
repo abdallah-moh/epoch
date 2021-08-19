@@ -22,7 +22,7 @@ public class ClockFaces : DrawingArea {
 
     public override bool draw (Cairo.Context cr) {
         int y = get_allocated_height () / 2;
-        int x = get_allocated_width ()  / 2;
+        int x = get_allocated_width () / 2;
         var radius = double.min (get_allocated_width () / 2,
                                  get_allocated_height () / 2) - 5;
 
