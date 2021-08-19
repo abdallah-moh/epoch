@@ -1,0 +1,17 @@
+name: "CI: Lint"
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: valalang/lint
+    steps:
+      - uses: actions/checkout@v1
+      - name: Vala Lint
+        run: io.elementary.vala-lint -d .
