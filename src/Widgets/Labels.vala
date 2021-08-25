@@ -28,12 +28,7 @@ public class Epoch.LabelsGrid : Gtk.Grid {
 
     private Epoch.TimeZonePicker time_zone_picker;
 
-    // public GClue.Location? geo_location {get; private set; default = null;}
-    // public GWeather.Location location;
-    // private GClue.Simple simple;
-
     construct {
-        // seek.begin ();
         time_zone_picker = new Epoch.TimeZonePicker ();
 
         var preferences_view = new Epoch.PreferencesView ();
@@ -265,30 +260,4 @@ public class Epoch.LabelsGrid : Gtk.Grid {
             return false;
         });
     }
-
-    // // Get the users location
-    // public async void seek () {
-    //     try {
-    //         simple = yield new GClue.Simple ("com.github.Suzie97.epoch", GClue.AccuracyLevel.CITY, null);
-    //     } catch (Error e) {
-    //         warning ("Failed to connect to GeoClue2 service: %s", e.message);
-    //         return;
-    //     }
-
-    //     simple.notify["location"].connect (() => {
-    //         on_location_updated.begin ();
-    //     });
-
-    //     on_location_updated.begin ();
-    // }
-
-    // public async void on_location_updated () {
-    //     geo_location = simple.get_location ();
-
-    //     location = location.find_nearest_city (geo_location.latitude, geo_location.longitude);
-
-    //     if (location != null) {
-    //         face1_label.label = dgettext ("libgweather-locations", location.get_city_name ());
-    //     }
-    // }
 }
